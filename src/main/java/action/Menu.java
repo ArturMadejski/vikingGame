@@ -21,7 +21,7 @@ public class Menu {
         System.out.println("Lets play! Gods with you!");
         System.out.println("-----------------------------------------------------------");
         Thread.sleep(4000);
-        System.out.println("Also in first step you decide who will be your character...");
+        System.out.println("Also in first step you decide who will be your player...");
         Thread.sleep(2000);
 
     }
