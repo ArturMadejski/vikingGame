@@ -5,7 +5,7 @@ import items.Axe;
 import items.Item;
 import items.Shield;
 import items.Wine;
-import Exception.*;
+import exception.*;
 
 import java.util.Random;
 import java.util.Scanner;

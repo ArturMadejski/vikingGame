@@ -1,5 +1,5 @@
 import action.GameOption;
-import Exception.VikingGameException;
+import exception.VikingGameException;
 
 /**
  * Author Artur Madejski, a.madejski@vp.pl, t: 503929703

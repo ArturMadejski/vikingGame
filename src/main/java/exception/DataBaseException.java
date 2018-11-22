@@ -1,4 +1,4 @@
-package Exception;
+package exception;
 
 public class DataBaseException extends VikingGameException {
     public DataBaseException(String message) {
