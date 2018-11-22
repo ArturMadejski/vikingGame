@@ -1,4 +1,5 @@
 import action.GameOption;
+import Exception.VikingGameException;
 
 /**
  * Author Artur Madejski, a.madejski@vp.pl, t: 503929703
@@ -6,7 +7,7 @@ import action.GameOption;
 
 public class GameRunner {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, VikingGameException {
        GameOption.START();
 
 

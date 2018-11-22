@@ -5,6 +5,7 @@ import items.Axe;
 import items.Item;
 import items.Shield;
 import items.Wine;
+import Exception.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class GameOption {
     static Item item;
     static Menu menu = new Menu();
 
-    public static void START() throws InterruptedException {
+    public static void START() throws InterruptedException, VikingGameException {
         menu.welcome();
         menu.printMenuCharacters();
         choiceCharacter();
@@ -26,7 +27,7 @@ public class GameOption {
 
     }
 
-    public static void repeat() throws InterruptedException {
+    public static void repeat() throws InterruptedException, VikingGameException {
         System.out.println("One more time ? Y / N");
         Scanner scan = new Scanner(System.in);
         char userChoice = scan.next().toLowerCase().charAt(0);
@@ -39,6 +40,7 @@ public class GameOption {
                 break;
 
                 default:
+                    //throw new ChoiceNotFoundException(" There is no option, end game with exception");
                     System.out.println("There is no option...");
                     repeat();
         }
