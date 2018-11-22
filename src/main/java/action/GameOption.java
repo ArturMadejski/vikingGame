@@ -1,6 +1,7 @@
 package action;
 
 import characters.*;
+import characters.Character;
 import items.Axe;
 import items.Item;
 import items.Shield;
@@ -12,8 +13,8 @@ import java.util.Scanner;
 
 public class GameOption {
 
-    static Player player;
-    static Player enemy;
+    static Character player;
+    static Character enemy;
     static Item item;
     static Menu menu = new Menu();
 
@@ -46,32 +47,32 @@ public class GameOption {
         }
     }
 
-    public static Player choiceCharacter() throws InterruptedException {
+    public static Character choiceCharacter() throws InterruptedException {
         Scanner in = new Scanner(System.in);
         int userChoice = in.nextInt();
         switch (userChoice) {
             case 1:
-                player = new Ragnar(0, 0, 0);
+                player = new Ragnar(0, 0);
                 System.out.println("You're King Ragnar  -> " + player.toString());
                 choiceItem();
                 break;
             case 2:
-                player = new Rollo(0, 0, 0);
+                player = new Rollo(0, 0);
                 System.out.println("You're Rollo  -> " + player.toString());
                 choiceItem();
                 break;
             case 3:
-                player = new Lagerta(0, 0, 0);
+                player = new Lagerta(0, 0);
                 System.out.println("You're beautiful Female Shield Bearer, Lagerta  -> " + player.toString());
                 choiceItem();
                 break;
             case 4:
-                player = new Flokki(0, 0, 0);
+                player = new Flokki(0, 0);
                 System.out.println("Ohh, Flokki, Flokki...  -> " + player.toString());
                 choiceItem();
                 break;
             case 5:
-                player = new Bjorn(0, 0, 0);
+                player = new Bjorn(0, 0);
                 System.out.println("You're Bjorn, Ragnar's son  -> " + player.toString());
                 choiceItem();
                 break;
@@ -85,32 +86,33 @@ public class GameOption {
         return player;
 
     }
-    public static Player choiceEnemy() throws InterruptedException {
+
+    public static Character choiceEnemy() throws InterruptedException {
         Random rand = new Random();
         int enemyChoice = rand.nextInt(5) + 1;
         switch (enemyChoice) {
             case 1:
-                enemy = new Ragnar(0, 0, 0);
+                enemy = new Ragnar(0, 0);
                 System.out.println("You fight with King  -> " + enemy.toString());
                 randomEnemyItem();
                 break;
             case 2:
-                enemy = new Rollo(0, 0, 0);
+                enemy = new Rollo(0, 0);
                 System.out.println("You fight with Rollo  -> " + enemy.toString());
                 randomEnemyItem();
                 break;
             case 3:
-                enemy = new Lagerta(0, 0, 0);
+                enemy = new Lagerta(0, 0);
                 System.out.println("You fight with Lagerta  -> " + enemy.toString());
                 randomEnemyItem();
                 break;
             case 4:
-                enemy = new Flokki(0, 0, 0);
+                enemy = new Flokki(0, 0);
                 System.out.println("You fight with Flokki  -> " + enemy.toString());
                 randomEnemyItem();
                 break;
             case 5:
-                enemy = new Bjorn(0, 0, 0);
+                enemy = new Bjorn(0, 0);
                 System.out.println("You fight with Bjorn -> " + enemy.toString());
                 randomEnemyItem();
                 break;
@@ -210,35 +212,38 @@ public class GameOption {
         System.out.println("Let's fight");
         System.out.println("-----------------------------");
         Thread.sleep(2500);
-        int attackEnemy = (player.getHp() + player.getDp()) - enemy.getAp();
-        int attackPlayer = (enemy.getHp() + enemy.getDp()) - player.getAp();
 
-        if (attackPlayer <= 0) {
-            System.out.println("You kill enemy...");
-        } else {
-            if (attackEnemy <= 0) {
-                System.out.println("YOU GO TO VALHALLA, GAME OVER");
+        int pLife = player.getHp() + player.getDp();
+        int eLife = enemy.getHp() + enemy.getDp();
+
+        while (pLife > 0 || eLife > 0) {
+            int playerTempLife = pLife - enemy.getAp();
+            int enemyTempLife = eLife - player.getAp();
+
+            if (enemyTempLife <= 0) {
+                System.out.println("Finally, you killed enemy...");
+                break;
             } else {
-                System.out.println("You attack first...");
-                Thread.sleep(1500);
-                System.out.println("...and you take " + attackPlayer + " points of enemy's life");
-                System.out.println("Enemy turn...");
-                Thread.sleep(1500);
-                System.out.println("...he takes you " + attackEnemy + " points of life");
-                player.setHp(attackEnemy);
-                enemy.setHp(attackPlayer);
+                if (playerTempLife <= 0) {
+                    System.out.println("ENEMY WIN, YOU GO TO VALHALLA, GAME OVER");
+                    break;
+                } else {
+                    System.out.println("You attack first...");
+                    Thread.sleep(1500);
+                    System.out.println("...and you take " + player.getAp() + " points of enemy's life");
+                    System.out.println("Enemy turn...");
+                    Thread.sleep(1500);
+                    System.out.println("...he takes you " + enemy.getAp() + " points of life");
 
-                /**
-                 * In the next round I'll set new HP as a this deference -> HP + DP and enemy AP
-                 * but because AP is random number this value of life can go up or down, its like
-                 * lottery who win...
-                 */  // i've to do sth with this!!!!
-                System.out.println("--------------------------");
-                System.out.println("Next round");
-                fight();
+                    pLife = playerTempLife;
+                    eLife = enemyTempLife;
+
+                    System.out.println("--------------------------");
+                    System.out.println("Next round");
+
+                }
             }
         }
+
     }
-
-
 }
