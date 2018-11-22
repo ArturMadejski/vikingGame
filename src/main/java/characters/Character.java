@@ -2,13 +2,13 @@ package characters;
 
 import java.util.Random;
 
-public class Player {
+public class Character {
 
-    int hp, ap, dp;
+    public int hp, ap, dp;
 
-    Random random = new Random();
+    public Random random = new Random();
 
-    public Player(int hp, int ap, int dp) {
+    public Character(int hp, int dp) {
         this.hp = hp;
         this.ap = getAp();
         this.dp = dp;
@@ -29,7 +29,7 @@ public class Player {
     }
 
     public int getAp() {
-        return ap = random.nextInt(55) + 65;
+        return ap = random.nextInt(30) + 40;
     }
 
     public int setAp(int ap) {
