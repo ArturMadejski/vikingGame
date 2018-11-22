@@ -50,14 +50,12 @@ public class Menu {
     };
 
     public void printMenuCharacters() {
-        if (menuCharacters != null) {
             Arrays.stream(menuCharacters).forEach(System.out::println);
         }
-    }
+
     public void printMenuItems() {
-        if (menuItems != null) {
             Arrays.stream(menuItems).forEach(System.out::println);
         }
-    }
+
 
 }
